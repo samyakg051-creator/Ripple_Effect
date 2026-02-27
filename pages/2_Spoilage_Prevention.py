@@ -7,6 +7,7 @@ import streamlit as st
 from datetime import date, timedelta
 from modules.agri_data import CROP_EMOJI, DEFAULT_EMOJI, CROP_DURATION
 from modules.data_loader import build_mandi_price_dict, get_top_mandis_for_crop
+from utils.translator import t
 
 st.set_page_config(page_title="AgriChain — Spoilage Prevention", page_icon="🛡️", layout="wide")
 
@@ -55,26 +56,26 @@ for k, v in [("crop", CROPS[0]), ("storage_type","warehouse"), ("sowing_date", d
 with st.sidebar:
     st.markdown("""
     <div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:#6ee86e;margin-bottom:0.3rem">&#127807; AgriChain</div>
-    <div style="font-size:0.78rem;color:#4a7a4a;margin-bottom:1.2rem">Spoilage Prevention</div>
-    <hr style="border:none;border-top:1px solid #1e3a1e;margin:0.8rem 0">
+    <div style="font-size:0.78rem;color:#a8d5ba;margin-bottom:1.2rem">{t('Spoilage Prevention', lang)}</div>
+    <hr style="border:none;border-top:1px solid #2d6a4f;margin:0.8rem 0">
     """, unsafe_allow_html=True)
 
-    crop = st.selectbox("&#127807; Crop", CROPS,
+    crop = st.selectbox(f"&#127807; {t('Crop', lang)}", CROPS,
         index=CROPS.index(st.session_state.crop) if st.session_state.crop in CROPS else 0)
     st.session_state.crop = crop
 
-    storage = st.selectbox("&#127968; Storage Type", STORAGES,
+    storage = st.selectbox(f"&#127968; {t('Storage Type', lang)}", STORAGES,
         index=STORAGES.index(st.session_state.storage_type) if st.session_state.storage_type in STORAGES else 1,
         format_func=lambda x: x.replace("_"," ").title())
     st.session_state.storage_type = storage
 
-    sowing = st.date_input("&#128197; Sowing Date",
+    sowing = st.date_input(f"&#128197; {t('Sowing Date', lang)}",
         value=st.session_state.sowing_date if isinstance(st.session_state.sowing_date, date) else date.today())
     st.session_state.sowing_date = sowing
 
-    days_stored = st.slider("&#128197; Days Since Harvest", 0, 90, 7)
+    days_stored = st.slider(f"&#128197; {t('Days Since Harvest', lang)}", 0, 90, 7)
 
-    st.markdown('<hr style="border:none;border-top:1px solid #1e3a1e;margin:0.8rem 0">', unsafe_allow_html=True)
+    st.markdown('<hr style="border:none;border-top:1px solid #2d6a4f;margin:0.8rem 0">', unsafe_allow_html=True)
     if st.button("&#8592; Harvest Score"):
         st.switch_page("app.py")
     if st.button("&#128506;&#65039; Map Explorer"):
@@ -112,21 +113,21 @@ duration = CROP_DURATION.get(crop, 90)
 harvest_date = sowing + timedelta(days=duration)
 days_to_harvest = (harvest_date - date.today()).days
 
-st.markdown(f'<div class="section-hd">&#127697;&#65039; Spoilage Risk — {emoji} {crop}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="section-hd">&#127697;&#65039; {t("Spoilage Risk", lang)} — {emoji} {crop}</div>', unsafe_allow_html=True)
 st.markdown(f"""
 <div class="metric-row">
-    <div class="metric-pill"><div class="lbl">Storage Type</div><div class="val">{storage.replace("_"," ").title()}</div></div>
-    <div class="metric-pill"><div class="lbl">Days Since Harvest</div><div class="val">{days_stored} days</div></div>
-    <div class="metric-pill"><div class="lbl">Est. Harvest Date</div><div class="val">{harvest_date.strftime("%b %d")}</div></div>
-    <div class="metric-pill"><div class="lbl">Days to Harvest</div><div class="val">{"Past" if days_to_harvest<0 else f"{days_to_harvest}d"}</div></div>
+    <div class="metric-pill"><div class="lbl">{t('Storage Type', lang)}</div><div class="val">{storage.replace("_"," ").title()}</div></div>
+    <div class="metric-pill"><div class="lbl">{t('Days Since Harvest', lang)}</div><div class="val">{days_stored} {t('days', lang)}</div></div>
+    <div class="metric-pill"><div class="lbl">{t('Est. Harvest Date', lang)}</div><div class="val">{harvest_date.strftime("%b %d")}</div></div>
+    <div class="metric-pill"><div class="lbl">{t('Days to Harvest', lang)}</div><div class="val">{"Past" if days_to_harvest<0 else f"{days_to_harvest}d"}</div></div>
 </div>
 """, unsafe_allow_html=True)
 
 # ── Risk card ─────────────────────────────────────────────────────────────────
 st.markdown(f"""
 <div class="risk-card {risk_cls}">
-    <div class="risk-label">{risk_emoji} {risk_lvl} RISK</div>
-    <div class="risk-pct">Spoilage probability: <strong>{risk_pct}%</strong> after {days_stored} days stored</div>
+    <div class="risk-label">{risk_emoji} {t(risk_lvl, lang)} {t('RISK', lang)}</div>
+    <div class="risk-pct">{t('Spoilage Probability', lang)}: <strong>{risk_pct}%</strong> — {days_stored} {t('days stored', lang)}</div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -161,14 +162,14 @@ crop_tips = TIPS.get(crop, {
     "HIGH":["Sell immediately","Consult agri expert"]
 })
 
-st.markdown('<div class="section-hd">&#128736;&#65039; Prevention Tips</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="section-hd">&#128736;&#65039; {t("Prevention Tips", lang)}</div>', unsafe_allow_html=True)
 
 def show_tips(level: str):
     for tip in crop_tips.get(level, []):
-        icon = {"LOW":"&#9989;","MEDIUM":"&#9888;&#65039;","HIGH":"&#128680;"}[level]
-        st.markdown(f"""
+            icon = {"LOW":"&#9989;","MEDIUM":"&#9888;&#65039;","HIGH":"&#128680;"}[level]
+            st.markdown(f"""
         <div class="tip-card">
-            <div class="tip-title {tip_cls}">{icon} {level} RISK ACTION</div>
+            <div class="tip-title {tip_cls}">{icon} {t(level, lang)} {t('RISK ACTION', lang)}</div>
             <div style="font-size:0.9rem">{tip}</div>
         </div>""", unsafe_allow_html=True)
 
@@ -178,7 +179,7 @@ if risk_lvl in ("MEDIUM","HIGH"):
     show_tips("LOW")
 
 # ── Preservation Actions — Ranked by Cost & Effectiveness ─────────────────────
-st.markdown('<div class="section-hd">&#128176; Preservation Actions — Ranked by Cost & Effectiveness</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="section-hd">&#128176; {t("Preservation Actions", lang)}</div>', unsafe_allow_html=True)
 
 PRESERVATION_ACTIONS = {
     "Tomato": [
@@ -245,21 +246,21 @@ for rank, (action, cost, effectiveness, time_needed, benefit) in enumerate(actio
     <div class="tip-card" style="display:flex;align-items:center;gap:1rem;">
         <div style="font-size:1.6rem;font-weight:800;color:{rank_color};min-width:32px;text-align:center">#{rank}</div>
         <div style="flex:1">
-            <div style="font-weight:700;color:#d4f0c0;font-size:0.92rem">{action}</div>
+            <div style="font-weight:700;color:#1b1b1b;font-size:0.92rem">{action}</div>
             <div style="display:flex;gap:1.5rem;margin-top:4px;flex-wrap:wrap">
-                <span style="font-size:0.78rem;color:#4a7a4a">💰 Cost: <b style="color:#d4f0c0">{cost}</b></span>
-                <span style="font-size:0.78rem;color:#4a7a4a">⭐ Rating: <b style="color:#ffc107">{effectiveness}</b></span>
-                <span style="font-size:0.78rem;color:#4a7a4a">⏱️ Time: <b style="color:#d4f0c0">{time_needed}</b></span>
+                <span style="font-size:0.78rem;color:#555">💰 {t('Cost', lang)}: <b style="color:#1b1b1b">{cost}</b></span>
+                <span style="font-size:0.78rem;color:#555">⭐ {t('Rating', lang)}: <b style="color:#b8860b">{effectiveness}</b></span>
+                <span style="font-size:0.78rem;color:#555">⏱️ {t('Time', lang)}: <b style="color:#1b1b1b">{time_needed}</b></span>
             </div>
-            <div style="font-size:0.76rem;color:#6ee86e;margin-top:3px">✅ {benefit}</div>
+            <div style="font-size:0.76rem;color:#2d6a4f;margin-top:3px">✅ {benefit}</div>
         </div>
     </div>""", unsafe_allow_html=True)
 
 # ── Best mandi for emergency sale ─────────────────────────────────────────────
-st.markdown('<div class="section-hd">&#127978; Best Mandi for Emergency Sale</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="section-hd">&#127978; {t("Best Mandi for Emergency Sale", lang)}</div>', unsafe_allow_html=True)
 top_df = get_top_mandis_for_crop(crop, n=3)
 if top_df.empty:
-    st.info("No mandi data available for this crop.")
+    st.info(t("No mandi data available", lang))
 else:
     cols = st.columns(len(top_df))
     for i, row in top_df.iterrows():
@@ -267,13 +268,13 @@ else:
             st.markdown(f"""
             <div class="tip-card" style="text-align:center">
                 <div style="font-size:1.4rem">&#127978;</div>
-                <div style="font-weight:700;color:#6ee86e">{row['Mandi']}</div>
-                <div style="font-size:0.82rem;color:#4a7a4a">Avg: &#8377;{row['AvgPrice']:,}/qtl</div>
+                <div style="font-weight:700;color:#2d6a4f">{row['Mandi']}</div>
+                <div style="font-size:0.82rem;color:#555">{t('Avg', lang)}: &#8377;{row['AvgPrice']:,}/qtl</div>
                 <div style="font-size:1.1rem;font-weight:700;margin-top:4px">&#8377;{row['LatestPrice']:,}/qtl</div>
             </div>""", unsafe_allow_html=True)
 
 st.markdown("""
-<div style="text-align:center;color:#3a5a3a;font-size:0.76rem;margin-top:1rem">
-    Risk calculated from crop sensitivity, storage type, and days stored. Actual risk may vary with local conditions.
+<div style="text-align:center;color:#555;font-size:0.76rem;margin-top:1rem">
+    {t('Risk disclaimer', lang)}
 </div>""", unsafe_allow_html=True)
 

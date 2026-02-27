@@ -103,6 +103,7 @@ st.markdown("""
 
 STORAGE_ICONS = {"cold_storage":"❄️","warehouse":"🏗️","covered_shed":"🏚️","open_yard":"🌿","none":"🚫"}
 
+from utils.translator import t
 from modules.price_analysis import analyse_prices
 from modules.scoring import generate_score
 from modules.weather import get_weather_score
@@ -133,16 +134,16 @@ from utils.sidebar import render_sidebar
 lang = render_sidebar(current_page="home")
 
 with st.sidebar:
-    st.markdown('<div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6ee86e;margin-bottom:6px">🌾 Farm Parameters</div>',
+    st.markdown(f'<div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6ee86e;margin-bottom:6px">🌾 {t("Farm Parameters", lang)}</div>',
                 unsafe_allow_html=True)
-    crop = st.selectbox("🌱  Crop", all_crops, index=0)
+    crop = st.selectbox(f"🌱  {t('Crop', lang)}", all_crops, index=0)
     mandis_for_crop = get_mandis_for_crop(crop)
-    mandi = st.selectbox("🏪  Mandi Market", mandis_for_crop, index=0)
-    storage_type = st.selectbox("🏚️  Storage Type", STORAGE,
+    mandi = st.selectbox(f"🏪  {t('Mandi Market', lang)}", mandis_for_crop, index=0)
+    storage_type = st.selectbox(f"🏚️  {t('Storage Type', lang)}", STORAGE,
         index=STORAGE.index(st.session_state.storage_type) if st.session_state.storage_type in STORAGE else 0,
         format_func=lambda x: f"{STORAGE_ICONS.get(x,'')}  {x.replace('_',' ').title()}")
-    distance_km = st.slider("🚛  Distance to Mandi (km)", 0, 500, 100, 10)
-    run_button = st.button("📊  Calculate Score", type="primary")
+    distance_km = st.slider(f"🚛  {t('Distance to Mandi (km)', lang)}", 0, 500, 100, 10)
+    run_button = st.button(f"📊  {t('Calculate Score', lang)}", type="primary")
 
 groq_api_key = os.environ.get("GROQ_API_KEY", "").strip()
 
@@ -151,7 +152,7 @@ st.markdown(f"""
     <div class="hero-logo">🌾</div>
     <div>
         <div class="hero-title">AgriChain</div>
-        <div class="hero-subtitle">Harvest Readiness Intelligence · {crop} · {mandi}</div>
+        <div class="hero-subtitle">{t('Harvest Readiness Intelligence', lang)} · {crop} · {mandi}</div>
     </div>
 </div>
 """, unsafe_allow_html=True)
@@ -208,7 +209,7 @@ if st.session_state.analysis_done:
     <div style="background:#fff;border:2px solid {summary_border};
         border-radius:16px;padding:1.4rem 1.6rem;margin-bottom:1rem;box-shadow:0 2px 8px #2d6a4f08;">
         <div style="font-size:0.72rem;font-weight:600;color:{summary_border};text-transform:uppercase;
-            letter-spacing:0.08em;margin-bottom:0.6rem">🌾 Your Harvest Summary</div>
+            letter-spacing:0.08em;margin-bottom:0.6rem">🌾 {t('Your Harvest Summary', lang)}</div>
         <div style="font-size:1rem;line-height:1.7;color:#333">{farmer_summary}</div>
     </div>""", unsafe_allow_html=True)
 
@@ -224,7 +225,7 @@ if st.session_state.analysis_done:
         padding:1.2rem 1.4rem;margin-bottom:1rem;box-shadow:0 2px 8px #2d6a4f08;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.6rem">
             <span style="font-size:0.72rem;font-weight:600;color:#2d6a4f;text-transform:uppercase;
-                letter-spacing:0.08em">⏰ When to Sell</span>
+                letter-spacing:0.08em">⏰ {t('When to Sell', lang)}</span>
             <span style="background:{urgency_color}22;border:1px solid {urgency_color};color:{urgency_color};
                 padding:0.2rem 0.8rem;border-radius:20px;font-size:0.78rem;font-weight:700">{urgency_level}</span>
         </div>
@@ -239,10 +240,10 @@ if st.session_state.analysis_done:
         <div><span class="score-badge {bc}">{bd} {bt}</span></div>
         <div class="score-tagline">{tg}</div>
         <div class="component-scores">
-            <div class="comp-item"><div class="comp-label">Price</div><div class="comp-value">{pr.price_score:.1f}<span>/30</span></div></div>
-            <div class="comp-item"><div class="comp-label">Weather</div><div class="comp-value">{sr.weather_score:.1f}<span>/30</span></div></div>
-            <div class="comp-item"><div class="comp-label">Storage</div><div class="comp-value">{sr.storage_score:.1f}<span>/20</span></div></div>
-            <div class="comp-item"><div class="comp-label">Transport</div><div class="comp-value">{sr.transport_score:.1f}<span>/20</span></div></div>
+            <div class="comp-item"><div class="comp-label">{t('Price', lang)}</div><div class="comp-value">{pr.price_score:.1f}<span>/30</span></div></div>
+            <div class="comp-item"><div class="comp-label">{t('Weather', lang)}</div><div class="comp-value">{sr.weather_score:.1f}<span>/30</span></div></div>
+            <div class="comp-item"><div class="comp-label">{t('Storage', lang)}</div><div class="comp-value">{sr.storage_score:.1f}<span>/20</span></div></div>
+            <div class="comp-item"><div class="comp-label">{t('Transport', lang)}</div><div class="comp-value">{sr.transport_score:.1f}<span>/20</span></div></div>
         </div>
     </div>""", unsafe_allow_html=True)
 
@@ -253,19 +254,19 @@ if st.session_state.analysis_done:
         trend_icon = "&#8593;" if pr.trend_percent >= 5 else ("&#8595;" if pr.trend_percent < -5 else "&#8596;")
         trend_col = "#4caf50" if pr.trend_percent >= 0 else "#f44336"
 
-        st.markdown(f"""<div class="section-card"><div class="section-title">📈 Price Analysis — {st.session_state.selected_mandi}</div>
+        st.markdown(f"""<div class="section-card"><div class="section-title">📈 {t('Price Analysis', lang)} — {st.session_state.selected_mandi}</div>
         <div class="metric-grid">
-        <div class="metric-box"><div class="metric-lbl">7-Day Avg</div><div class="metric-val">₹{pr.last_7_avg:,.0f}</div></div>
-        <div class="metric-box"><div class="metric-lbl">30-Day Avg</div><div class="metric-val">₹{pr.last_30_avg:,.0f}</div></div>
-        <div class="metric-box"><div class="metric-lbl">Price Trend</div><div class="metric-val" style="color:{trend_col}">{trend_icon} {ts}{pr.trend_percent:.2f}%</div></div>
-        <div class="metric-box"><div class="metric-lbl">Price Score</div><div class="metric-val">{pr.price_score:.1f}<span style="font-size:0.82rem;color:#888"> /30</span></div></div>
+        <div class="metric-box"><div class="metric-lbl">{t('7-Day Avg', lang)}</div><div class="metric-val">₹{pr.last_7_avg:,.0f}</div></div>
+        <div class="metric-box"><div class="metric-lbl">{t('30-Day Avg', lang)}</div><div class="metric-val">₹{pr.last_30_avg:,.0f}</div></div>
+        <div class="metric-box"><div class="metric-lbl">{t('Price Trend', lang)}</div><div class="metric-val" style="color:{trend_col}">{trend_icon} {ts}{pr.trend_percent:.2f}%</div></div>
+        <div class="metric-box"><div class="metric-lbl">{t('Price Score', lang)}</div><div class="metric-val">{pr.price_score:.1f}<span style="font-size:0.82rem;color:#888"> /30</span></div></div>
         </div>""", unsafe_allow_html=True)
 
         # Price comparison with top mandis
         from modules.data_loader import get_top_mandis_for_crop
         top_m = get_top_mandis_for_crop(st.session_state.selected_crop, n=5)
         if not top_m.empty:
-            st.markdown('<div style="font-size:0.7rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin:0.8rem 0 0.4rem">Top Mandis Comparison</div>', unsafe_allow_html=True)
+            st.markdown(f'<div style="font-size:0.7rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin:0.8rem 0 0.4rem">{t("Top Mandis Comparison", lang)}</div>', unsafe_allow_html=True)
             for _, row in top_m.iterrows():
                 m_name = row["Mandi"]
                 m_price = int(row["LatestPrice"])
@@ -331,22 +332,22 @@ if st.session_state.analysis_done:
         mandi_name = st.session_state.selected_mandi
         st.markdown(f"""
         <div class="section-card">
-            <div class="section-title">&#127774; Weather at {mandi_name}</div>
+            <div class="section-title">&#127774; {t('Weather at', lang)} {mandi_name}</div>
             <span class="aqi-badge {aqi_cls}">AQI {wr.aqi} — {wr.aqi_label}</span>
             <div class="curr-grid">
-                <div class="curr-cell"><div class="curr-icon">&#127777;</div><div class="curr-lbl">Temp</div><div class="curr-val">{wr.current_temp}°C</div></div>
-                <div class="curr-cell"><div class="curr-icon">&#128167;</div><div class="curr-lbl">Humidity</div><div class="curr-val">{wr.current_humidity}%</div></div>
-                <div class="curr-cell"><div class="curr-icon">&#128168;</div><div class="curr-lbl">Wind</div><div class="curr-val">{wr.current_wind} km/h</div></div>
-                <div class="curr-cell"><div class="curr-icon">&#127783;</div><div class="curr-lbl">Precip</div><div class="curr-val">{wr.current_precip} mm</div></div>
-                <div class="curr-cell"><div class="curr-icon" style="color:{uv_col}">&#9728;</div><div class="curr-lbl">UV Index</div><div class="curr-val" style="color:{uv_col}">{uv} ({uv_lbl})</div></div>
-                <div class="curr-cell"><div class="curr-icon">&#128066;</div><div class="curr-lbl">PM2.5</div><div class="curr-val">{wr.pm25} &#181;g</div></div>
+                <div class="curr-cell"><div class="curr-icon">&#127777;</div><div class="curr-lbl">{t('Temp', lang)}</div><div class="curr-val">{wr.current_temp}°C</div></div>
+                <div class="curr-cell"><div class="curr-icon">&#128167;</div><div class="curr-lbl">{t('Humidity', lang)}</div><div class="curr-val">{wr.current_humidity}%</div></div>
+                <div class="curr-cell"><div class="curr-icon">&#128168;</div><div class="curr-lbl">{t('Wind', lang)}</div><div class="curr-val">{wr.current_wind} km/h</div></div>
+                <div class="curr-cell"><div class="curr-icon">&#127783;</div><div class="curr-lbl">{t('Precip', lang)}</div><div class="curr-val">{wr.current_precip} mm</div></div>
+                <div class="curr-cell"><div class="curr-icon" style="color:{uv_col}">&#9728;</div><div class="curr-lbl">{t('UV Index', lang)}</div><div class="curr-val" style="color:{uv_col}">{uv} ({uv_lbl})</div></div>
+                <div class="curr-cell"><div class="curr-icon">&#128066;</div><div class="curr-lbl">{t('PM2.5', lang)}</div><div class="curr-val">{wr.pm25} &#181;g</div></div>
             </div>
-            <div style="font-size:0.7rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem">5-Day Forecast</div>
+            <div style="font-size:0.7rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:0.4rem">{t('5-Day Forecast', lang)}</div>
             <div class="day-cards">{day_html}</div>
             <div style="display:flex;gap:1.5rem;margin-top:0.8rem;flex-wrap:wrap">
-                <span style="font-size:0.78rem;color:#555">Weather Score: <b style="color:#1b1b1b">{wr.weather_score:.1f}/30</b></span>
-                <span style="font-size:0.78rem;color:#555">&#127777; Hot days &gt;35°C: <b style="color:{'#c0392b' if wr.hot_days_count>0 else '#2d6a4f'}">{wr.hot_days_count}</b></span>
-                <span style="font-size:0.78rem;color:#555">&#127783; Rainy days &gt;60%: <b style="color:{'#c0392b' if wr.rainy_days_count>0 else '#2d6a4f'}">{wr.rainy_days_count}</b></span>
+                <span style="font-size:0.78rem;color:#555">{t('Weather Score', lang)}: <b style="color:#1b1b1b">{wr.weather_score:.1f}/30</b></span>
+                <span style="font-size:0.78rem;color:#555">&#127777; {t('Hot days', lang)} &gt;35°C: <b style="color:{'#c0392b' if wr.hot_days_count>0 else '#2d6a4f'}">{wr.hot_days_count}</b></span>
+                <span style="font-size:0.78rem;color:#555">&#127783; {t('Rainy days', lang)} &gt;60%: <b style="color:{'#c0392b' if wr.rainy_days_count>0 else '#2d6a4f'}">{wr.rainy_days_count}</b></span>
             </div>
         </div>""", unsafe_allow_html=True)
 
@@ -427,7 +428,7 @@ if st.session_state.analysis_done:
 
         st.markdown(f"""
         <div class="forecast-card">
-            <div class="forecast-title">{trend_emoji} ML Price Forecast — {st.session_state.selected_crop} at {st.session_state.selected_mandi}</div>
+            <div class="forecast-title">{trend_emoji} {t('ML Price Forecast', lang)} — {st.session_state.selected_crop} · {st.session_state.selected_mandi}</div>
             <div style="display:flex;gap:1.5rem;margin-bottom:0.8rem;flex-wrap:wrap;font-size:0.76rem;color:#555">
                 <span>Model confidence: <b style="color:{conf_col}">{forecast['confidence']}%</b></span>
                 <span>Current price: <b style="color:#1b1b1b">₹{curr:,.0f}/qtl</b></span>
@@ -435,17 +436,17 @@ if st.session_state.analysis_done:
             </div>
             <div class="pred-grid">
                 <div class="pred-cell">
-                    <div class="pred-lbl">In 7 Days</div>
+                    <div class="pred-lbl">{t('In 7 Days', lang)}</div>
                     <div class="pred-val" style="color:{c7}">₹{p7:,.0f}</div>
                     <div class="pred-change" style="color:{c7}">{a7} {chg7:+.1f}%</div>
                 </div>
                 <div class="pred-cell">
-                    <div class="pred-lbl">In 14 Days</div>
+                    <div class="pred-lbl">{t('In 14 Days', lang)}</div>
                     <div class="pred-val" style="color:{c14}">₹{p14:,.0f}</div>
                     <div class="pred-change" style="color:{c14}">{a14} {chg14:+.1f}%</div>
                 </div>
                 <div class="pred-cell">
-                    <div class="pred-lbl">In 30 Days</div>
+                    <div class="pred-lbl">{t('In 30 Days', lang)}</div>
                     <div class="pred-val" style="color:{c30}">₹{p30:,.0f}</div>
                     <div class="pred-change" style="color:{c30}">{a30} {chg30:+.1f}%</div>
                 </div>
@@ -455,8 +456,8 @@ if st.session_state.analysis_done:
             </div>
             <div class="chart-row" style="height:85px">{chart_bars}</div>
             <div style="display:flex;gap:1rem;margin-top:4px">
-                <span style="font-size:0.7rem;color:#555">&#9632; <span style="color:#a8d5ba">Historical</span></span>
-                <span style="font-size:0.7rem;color:#555">&#9632; <span style="color:#2d6a4f">Predicted</span></span>
+                <span style="font-size:0.7rem;color:#555">&#9632; <span style="color:#a8d5ba">{t('Historical', lang)}</span></span>
+                <span style="font-size:0.7rem;color:#555">&#9632; <span style="color:#2d6a4f">{t('Predicted', lang)}</span></span>
             </div>
         </div>""", unsafe_allow_html=True)
 
@@ -491,11 +492,11 @@ if st.session_state.analysis_done:
     # ── 📋 Why this recommendation? (VISIBLE by default) ──────────────────
     st.markdown(f"""
     <div class="section-card">
-        <div class="section-title">📋 Why This Recommendation?</div>
+        <div class="section-title">📋 {t('Why This Recommendation?', lang)}</div>
         <div class="explanation-text">{et}</div>
     </div>""", unsafe_allow_html=True)
 
-    st.markdown('<div class="chat-card"><div class="chat-title">🤖 AgriChain AI — Ask About Your Harvest</div>', unsafe_allow_html=True)
+    st.markdown(f'<div class="chat-card"><div class="chat-title">🤖 {t("AgriChain AI", lang)}</div>', unsafe_allow_html=True)
     for msg in st.session_state.chat_history:
         css = "chat-msg-user" if msg["role"]=="user" else "chat-msg-ai"
         pfx = "🧑‍🌾" if msg["role"]=="user" else "🤖"
@@ -504,7 +505,7 @@ if st.session_state.analysis_done:
     with st.form(key="chat_form", clear_on_submit=True):
         ci, cs = st.columns([5,1])
         with ci:
-            user_input = st.text_input("Ask AI", placeholder="Ask anything about your harvest...", label_visibility="collapsed")
+            user_input = st.text_input("Ask AI", placeholder=t('Ask anything', lang), label_visibility="collapsed")
         with cs:
             send_btn = st.form_submit_button("Send ↑")
     st.markdown('</div>', unsafe_allow_html=True)
@@ -523,17 +524,17 @@ if st.session_state.analysis_done:
                 except Exception as e:
                     st.error(f"AI error: {str(e).encode('ascii',errors='replace').decode('ascii')}")
 else:
-    st.markdown("""
+    st.markdown(f"""
     <div class="score-card" style="opacity:0.6;">
         <div class="score-number" style="font-size:3rem;color:#a8d5ba;">—</div>
         <div class="score-denom">/ 100</div>
         <div class="score-tagline" style="margin-top:0.8rem;">
-            Configure your parameters in the sidebar and click <strong style="color:#6ee86e">Calculate Score</strong> to begin.
+            {t('configure_msg', lang)} <strong style="color:#6ee86e">{t('Calculate Score', lang)}</strong>
         </div>
     </div>
     <div class="info-box">
-        🌾 &nbsp; Select your crop, mandi, storage type and distance, then click <strong>Calculate Score</strong>.<br>
-        After analysis, the <strong style="color:#2d6a4f">AgriChain AI</strong> will answer questions about your harvest.
+        🌾 &nbsp; {t('configure_msg', lang)} <strong>{t('Calculate Score', lang)}</strong>.<br>
+        {t('ai_help_msg', lang)}
     </div>
     """, unsafe_allow_html=True)
 

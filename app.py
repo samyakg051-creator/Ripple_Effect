@@ -19,31 +19,31 @@ st.set_page_config(
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #fefae0 !important; color: #1b1b1b !important; }
-.stApp { background-color: #fefae0 !important; }
-.main, .main > div, .block-container { background-color: #fefae0 !important; }
-[data-testid="stAppViewContainer"] { background-color: #fefae0 !important; }
-[data-testid="stHeader"] { background-color: #fefae0 !important; border-bottom: 1px solid #d4e6c3 !important; }
+html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #0c1a0c !important; color: #d4f0c0 !important; }
+.stApp { background-color: #0c1a0c !important; }
+.main, .main > div, .block-container { background-color: #0c1a0c !important; }
+[data-testid="stAppViewContainer"] { background-color: #0c1a0c !important; }
+[data-testid="stHeader"] { background-color: #0c1a0c !important; border-bottom: 1px solid #1e3a1e !important; }
 .main > div { padding-top: 1rem !important; }
-section[data-testid="stSidebar"] { background-color: #1a3d2e !important; border-right: 1px solid #2d6a4f; }
+section[data-testid="stSidebar"] { background-color: #0a1a0a !important; border-right: 1px solid #1e3a1e; }
 section[data-testid="stSidebar"] > div { padding: 1.2rem 1rem; }
 section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span, section[data-testid="stSidebar"] div { color: #d4f0c0 !important; }
 .aqi-badge { display:inline-block; padding:0.3rem 1rem; border-radius:20px; font-weight:700; font-size:0.88rem; margin-bottom:0.5rem; }
-.aqi-good       { background:#d4edda; border:1px solid #4caf50; color:#155724; }
-.aqi-moderate   { background:#fff3cd; border:1px solid #ffc107; color:#856404; }
-.aqi-unhealthy  { background:#f8d7da; border:1px solid #f44336; color:#721c24; }
-.aqi-hazardous  { background:#e8d5f5; border:1px solid #9c27b0; color:#6a0080; }
+.aqi-good       { background:#0e2a0e; border:1px solid #4caf50; color:#6ee86e; }
+.aqi-moderate   { background:#2a200e; border:1px solid #ffc107; color:#ffc107; }
+.aqi-unhealthy  { background:#2a0e0e; border:1px solid #f44336; color:#f44336; }
+.aqi-hazardous  { background:#1e0e2a; border:1px solid #9c27b0; color:#ce93d8; }
 .curr-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:0.6rem; margin-bottom:1rem; }
-.curr-cell { background:#fff; border:1px solid #d4e6c3; border-radius:10px; padding:0.7rem 0.8rem; text-align:center; box-shadow:0 2px 8px #2d6a4f08; }
+.curr-cell { background:#112011; border:1px solid #1e3a1e; border-radius:10px; padding:0.7rem 0.8rem; text-align:center; }
 .curr-icon { font-size:1.3rem; }
-.curr-lbl  { font-size:0.65rem; color:#555; text-transform:uppercase; letter-spacing:0.06em; margin:2px 0; }
-.curr-val  { font-size:1.05rem; font-weight:700; color:#1b1b1b; }
+.curr-lbl  { font-size:0.65rem; color:#52b788; text-transform:uppercase; letter-spacing:0.06em; margin:2px 0; }
+.curr-val  { font-size:1.05rem; font-weight:700; color:#d4f0c0; }
 .day-cards { display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:0.5rem; }
-.day-card  { background:#fff; border:1px solid #d4e6c3; border-radius:12px; padding:0.8rem 0.7rem; flex:1; min-width:110px; text-align:center; box-shadow:0 2px 8px #2d6a4f08; }
-.day-date  { font-size:0.68rem; color:#555; margin-bottom:4px; }
+.day-card  { background:#112011; border:1px solid #1e3a1e; border-radius:12px; padding:0.8rem 0.7rem; flex:1; min-width:110px; text-align:center; }
+.day-date  { font-size:0.68rem; color:#52b788; margin-bottom:4px; }
 .day-cond  { font-size:1rem; margin:4px 0; }
-.day-temp  { font-size:0.88rem; font-weight:700; color:#1b1b1b; }
-.day-sub   { font-size:0.72rem; color:#555; margin-top:2px; }
+.day-temp  { font-size:0.88rem; font-weight:700; color:#d4f0c0; }
+.day-sub   { font-size:0.72rem; color:#52b788; margin-top:2px; }
 .sidebar-brand { display: flex; align-items: center; gap: 10px; margin-bottom: 0.2rem; }
 .sidebar-brand-name { font-family: 'Syne', sans-serif; font-size: 1.3rem; font-weight: 800; color: #6ee86e; }
 .sidebar-subtitle { font-size: 0.78rem; color: #4a7a4a; font-weight: 500; margin-bottom: 1.5rem; }
@@ -51,38 +51,38 @@ section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p, sect
 div[data-testid="stSelectbox"] > div > div { background-color: #0e2a1c !important; border: 1px solid #2d6a4f !important; border-radius: 8px !important; color: #d4f0c0 !important; }
 .stButton > button { background-color: #2d6a4f; color: #fff; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.95rem; border: none; border-radius: 8px; padding: 0.55rem 1.5rem; width: 100%; cursor: pointer; transition: background 0.2s; }
 .stButton > button:hover { background-color: #1a3d2e; }
-.hero-card { background: linear-gradient(135deg, #2d6a4f, #1a3d2e); border-radius: 18px; padding: 1.5rem 2rem; display: flex; align-items: center; gap: 16px; margin-bottom: 1rem; box-shadow: 0 4px 20px #2d6a4f22; }
+.hero-card { background: linear-gradient(135deg, #2d6a4f, #1a3d2e); border-radius: 18px; padding: 1.5rem 2rem; display: flex; align-items: center; gap: 16px; margin-bottom: 1rem; box-shadow: 0 4px 20px #2d6a4f44; }
 .hero-logo { font-size: 2.4rem; }
 .hero-title { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; color: #fff; margin: 0; }
 .hero-subtitle { color: #a8d5ba; font-size: 0.85rem; margin-top: 2px; }
-.score-card { background: linear-gradient(135deg, #2d6a4f, #1a3d2e); border-radius: 16px; padding: 1rem 1.5rem; text-align: center; margin-bottom: 1rem; color: #fff; box-shadow: 0 4px 20px #2d6a4f22; display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; }
+.score-card { background: linear-gradient(135deg, #2d6a4f, #1a3d2e); border-radius: 16px; padding: 1rem 1.5rem; text-align: center; margin-bottom: 1rem; color: #fff; box-shadow: 0 4px 20px #2d6a4f44; display: flex; align-items: center; justify-content: center; gap: 2rem; flex-wrap: wrap; }
 .score-left { display: flex; flex-direction: column; align-items: center; }
 .score-number { font-family: 'Syne', sans-serif; font-size: 3.2rem; font-weight: 800; line-height: 1; color: #6ee86e; }
 .score-denom { font-size: 0.9rem; color: #a8d5ba; margin-top: 2px; }
 .score-badge { display: inline-flex; align-items: center; gap: 6px; padding: 0.25rem 0.8rem; border-radius: 20px; font-size: 0.76rem; font-weight: 600; margin: 0.4rem auto 0.2rem auto; }
-.badge-green  { background: #d4edda; color: #155724; }
-.badge-yellow { background: #fff3cd; color: #856404; }
-.badge-red    { background: #f8d7da; color: #721c24; }
+.badge-green  { background: #0e2a0e; color: #6ee86e; border:1px solid #4caf50; }
+.badge-yellow { background: #2a200e; color: #ffc107; border:1px solid #ffc107; }
+.badge-red    { background: #2a0e0e; color: #f44336; border:1px solid #f44336; }
 .score-tagline { font-size: 0.72rem; color: #a8d5ba; margin-top: 2px; }
 .component-scores { display: flex; justify-content: center; gap: 0.6rem; flex-wrap: wrap; }
-.comp-item { text-align: center; background: #1a3d2e; border-radius: 8px; padding: 0.4rem 0.8rem; }
+.comp-item { text-align: center; background: #0a1a0a; border-radius: 8px; padding: 0.4rem 0.8rem; border:1px solid #1e3a1e; }
 .comp-label { font-size: 0.65rem; color: #a8d5ba; text-transform: uppercase; letter-spacing: 0.06em; }
-.comp-value { font-size: 0.88rem; font-weight: 700; color: #fff; }
+.comp-value { font-size: 0.88rem; font-weight: 700; color: #d4f0c0; }
 .comp-value span { font-size: 0.7rem; color: #a8d5ba; }
-.section-card { background: #fff; border: 1px solid #d4e6c3; border-radius: 14px; padding: 1.4rem 1.6rem; margin-bottom: 1rem; box-shadow: 0 2px 8px #2d6a4f08; }
-.section-title { font-size: 0.78rem; font-weight: 700; color: #2d6a4f; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+.section-card { background: #112011; border: 1px solid #1e3a1e; border-radius: 14px; padding: 1.4rem 1.6rem; margin-bottom: 1rem; }
+.section-title { font-size: 0.78rem; font-weight: 700; color: #6ee86e; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
 .metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; }
-.metric-box { background: #f0f9f0; border: 1px solid #d4e6c3; border-radius: 10px; padding: 0.9rem 1rem; }
-.metric-lbl { font-size: 0.72rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; }
-.metric-val { font-size: 1.3rem; font-weight: 700; color: #1b1b1b; margin-top: 2px; }
-.metric-val.positive { color: #2d6a4f; }
-.metric-val.negative { color: #c0392b; }
-.explanation-text { font-size: 0.88rem; line-height: 1.7; color: #555; white-space: pre-wrap; }
-.chat-card { background: #fff; border: 1px solid #d4e6c3; border-radius: 14px; padding: 1.2rem 1.4rem; margin-bottom: 1rem; }
-.chat-title { font-size: 0.78rem; font-weight: 700; color: #2d6a4f; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+.metric-box { background: #0c1a0c; border: 1px solid #1e3a1e; border-radius: 10px; padding: 0.9rem 1rem; }
+.metric-lbl { font-size: 0.72rem; color: #52b788; text-transform: uppercase; letter-spacing: 0.06em; }
+.metric-val { font-size: 1.3rem; font-weight: 700; color: #d4f0c0; margin-top: 2px; }
+.metric-val.positive { color: #6ee86e; }
+.metric-val.negative { color: #f44336; }
+.explanation-text { font-size: 0.88rem; line-height: 1.7; color: #a8d5ba; white-space: pre-wrap; }
+.chat-card { background: #112011; border: 1px solid #1e3a1e; border-radius: 14px; padding: 1.2rem 1.4rem; margin-bottom: 1rem; }
+.chat-title { font-size: 0.78rem; font-weight: 700; color: #6ee86e; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
 .chat-msg-user { background: #2d6a4f; border-radius: 10px; padding: 0.7rem 1rem; margin-bottom: 0.6rem; font-size: 0.88rem; color: #fff; text-align: right; }
-.chat-msg-ai { background: #f0f9f0; border: 1px solid #d4e6c3; border-radius: 10px; padding: 0.7rem 1rem; margin-bottom: 0.6rem; font-size: 0.88rem; color: #333; line-height: 1.6; }
-.info-box { background: #f0f9f0; border: 1px solid #d4e6c3; border-radius: 10px; padding: 1.2rem 1.4rem; color: #555; font-size: 0.88rem; text-align: center; }
+.chat-msg-ai { background: #0c1a0c; border: 1px solid #1e3a1e; border-radius: 10px; padding: 0.7rem 1rem; margin-bottom: 0.6rem; font-size: 0.88rem; color: #d4f0c0; line-height: 1.6; }
+.info-box { background: #112011; border: 1px solid #1e3a1e; border-radius: 10px; padding: 1.2rem 1.4rem; color: #a8d5ba; font-size: 0.88rem; text-align: center; }
 footer { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
@@ -90,12 +90,12 @@ footer { visibility: hidden; }
 # ── Additional CSS for forecast section ───────────────────────────────────────
 st.markdown("""
 <style>
-.forecast-card { background: #fff; border: 1px solid #d4e6c3; border-radius: 14px; padding: 1.4rem 1.6rem; margin-bottom: 1rem; box-shadow: 0 2px 8px #2d6a4f08; }
-.forecast-title { font-size: 0.78rem; font-weight: 700; color: #2d6a4f; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
+.forecast-card { background: #112011; border: 1px solid #1e3a1e; border-radius: 14px; padding: 1.4rem 1.6rem; margin-bottom: 1rem; }
+.forecast-title { font-size: 0.78rem; font-weight: 700; color: #6ee86e; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 1rem; }
 .pred-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.8rem; margin-bottom: 1rem; }
-.pred-cell { background: #f0f9f0; border: 1px solid #d4e6c3; border-radius: 10px; padding: 0.9rem 1rem; text-align: center; }
-.pred-lbl { font-size: 0.68rem; color: #555; text-transform: uppercase; letter-spacing: 0.06em; }
-.pred-val { font-size: 1.3rem; font-weight: 700; margin-top: 4px; }
+.pred-cell { background: #0c1a0c; border: 1px solid #1e3a1e; border-radius: 10px; padding: 0.9rem 1rem; text-align: center; }
+.pred-lbl { font-size: 0.68rem; color: #52b788; text-transform: uppercase; letter-spacing: 0.06em; }
+.pred-val { font-size: 1.3rem; font-weight: 700; margin-top: 4px; color: #d4f0c0; }
 .pred-change { font-size: 0.76rem; margin-top: 2px; }
 .chart-row { display: flex; align-items: flex-end; gap: 2px; height: 60px; margin: 0.8rem 0; }
 .chart-bar { flex: 1; border-radius: 3px 3px 0 0; min-width: 3px; transition: height 0.3s; }
@@ -111,6 +111,9 @@ from modules.weather import get_weather_score
 from modules.explanation import generate_explanation, generate_harvest_window, generate_farmer_summary
 from modules.ai_assistant import get_ai_response, build_context
 from modules.price_predictor import predict_future_prices
+from utils.shared_state import init_shared, sync_all, get_shared, haversine_km
+
+init_shared()
 
 # Load data — uses absolute pathlib path from data_loader, safe from any CWD
 try:
@@ -143,8 +146,29 @@ with st.sidebar:
     storage_type = st.selectbox(f"🏚️  {t('Storage Type', lang)}", STORAGE,
         index=STORAGE.index(st.session_state.storage_type) if st.session_state.storage_type in STORAGE else 0,
         format_func=lambda x: f"{STORAGE_ICONS.get(x,'')}  {x.replace('_',' ').title()}")
-    distance_km = st.slider(f"🚛  {t('Distance to Mandi (km)', lang)}", 0, 500, 100, 10)
     run_button = st.button(f"📊  {t('Calculate Score', lang)}", type="primary")
+
+# ── Sync home selections to all pages ─────────────────────────────────────────
+sync_all(crop=crop, mandi=mandi, storage_type=storage_type,
+         district=st.session_state.get("district", "Pune"))
+
+# ── Auto-calculate distance from farm GPS to mandi ────────────────────────────
+try:
+    mandi_lat, mandi_lon = get_mandi_coords(mandi)
+    farm_lat = get_shared("farm_lat")
+    farm_lon = get_shared("farm_lon")
+    if farm_lat is not None and farm_lon is not None:
+        distance_km = haversine_km(float(farm_lat), float(farm_lon), mandi_lat, mandi_lon)
+        _dist_badge_color = "#6ee86e"
+        _dist_msg = f"🚛 {distance_km:.0f} km · 📍 {get_shared('farm_location_name') or 'Farm'} → {mandi}"
+    else:
+        distance_km = 100.0
+        _dist_badge_color = "#ffc107"
+        _dist_msg = f"🚛 {distance_km:.0f} km to {mandi} · ⚠️ Set your farm location for accurate distance"
+except Exception:
+    distance_km = 100.0
+    _dist_badge_color = "#555"
+    _dist_msg = f"🚛 ~{distance_km:.0f} km (approx)"
 
 groq_api_key = os.environ.get("GROQ_API_KEY", "").strip()
 
@@ -207,11 +231,11 @@ if st.session_state.analysis_done:
     )
     summary_border = {"Green":"#4caf50","Yellow":"#ffc107","Red":"#f44336"}.get(tl,"#4caf50")
     st.markdown(f"""
-    <div style="background:#fff;border:2px solid {summary_border};
-        border-radius:16px;padding:1.4rem 1.6rem;margin-bottom:1rem;box-shadow:0 2px 8px #2d6a4f08;">
+    <div style="background:#0c1a0c;border:2px solid {summary_border};
+        border-radius:16px;padding:1.4rem 1.6rem;margin-bottom:1rem;">
         <div style="font-size:0.72rem;font-weight:600;color:{summary_border};text-transform:uppercase;
             letter-spacing:0.08em;margin-bottom:0.6rem">🌾 {t('Your Harvest Summary', lang)}</div>
-        <div style="font-size:1rem;line-height:1.7;color:#333">{farmer_summary}</div>
+        <div style="font-size:1rem;line-height:1.7;color:#d4f0c0">{farmer_summary}</div>
     </div>""", unsafe_allow_html=True)
 
     # ── ⏰ Harvest Window Recommendation ──────────────────────────────────
@@ -222,15 +246,15 @@ if st.session_state.analysis_done:
         storage_type=st.session_state.storage_type,
     )
     st.markdown(f"""
-    <div style="background:#fff;border:1px solid #d4e6c3;border-radius:14px;
-        padding:1.2rem 1.4rem;margin-bottom:1rem;box-shadow:0 2px 8px #2d6a4f08;">
+    <div style="background:#112011;border:1px solid #1e3a1e;border-radius:14px;
+        padding:1.2rem 1.4rem;margin-bottom:1rem;">
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:0.6rem">
-            <span style="font-size:0.72rem;font-weight:600;color:#2d6a4f;text-transform:uppercase;
+            <span style="font-size:0.72rem;font-weight:600;color:#6ee86e;text-transform:uppercase;
                 letter-spacing:0.08em">⏰ {t('When to Sell', lang)}</span>
             <span style="background:{urgency_color}22;border:1px solid {urgency_color};color:{urgency_color};
                 padding:0.2rem 0.8rem;border-radius:20px;font-size:0.78rem;font-weight:700">{urgency_level}</span>
         </div>
-        <div style="font-size:0.92rem;line-height:1.6;color:#333">{window_text}</div>
+        <div style="font-size:0.92rem;line-height:1.6;color:#a8d5ba">{window_text}</div>
     </div>""", unsafe_allow_html=True)
 
     # ── Score Card ────────────────────────────────────────────────────────
@@ -262,31 +286,31 @@ if st.session_state.analysis_done:
         <div class="metric-box"><div class="metric-lbl">{t('7-Day Avg', lang)}</div><div class="metric-val">₹{pr.last_7_avg:,.0f}</div></div>
         <div class="metric-box"><div class="metric-lbl">{t('30-Day Avg', lang)}</div><div class="metric-val">₹{pr.last_30_avg:,.0f}</div></div>
         <div class="metric-box"><div class="metric-lbl">{t('Price Trend', lang)}</div><div class="metric-val" style="color:{trend_col}">{trend_icon} {ts}{pr.trend_percent:.2f}%</div></div>
-        <div class="metric-box"><div class="metric-lbl">{t('Price Score', lang)}</div><div class="metric-val">{pr.price_score:.1f}<span style="font-size:0.82rem;color:#888"> /30</span></div></div>
+        <div class="metric-box"><div class="metric-lbl">{t('Price Score', lang)}</div><div class="metric-val">{pr.price_score:.1f}<span style="font-size:0.82rem;color:#52b788"> /30</span></div></div>
         </div>""", unsafe_allow_html=True)
 
         # Price comparison with top mandis
         from modules.data_loader import get_top_mandis_for_crop
         top_m = get_top_mandis_for_crop(st.session_state.selected_crop, n=5)
         if not top_m.empty:
-            st.markdown(f'<div style="font-size:0.7rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin:0.8rem 0 0.4rem">{t("Top Mandis Comparison", lang)}</div>', unsafe_allow_html=True)
+            st.markdown(f'<div style="font-size:0.7rem;color:#52b788;text-transform:uppercase;letter-spacing:0.08em;margin:0.8rem 0 0.4rem">{t("Top Mandis Comparison", lang)}</div>', unsafe_allow_html=True)
             for _, row in top_m.iterrows():
                 m_name = row["Mandi"]
                 m_price = int(row["LatestPrice"])
                 m_avg = int(row["AvgPrice"])
                 is_current = m_name.lower() == st.session_state.selected_mandi.lower()
                 bar_w = min(100, max(20, int(m_price / (top_m["LatestPrice"].max() or 1) * 100)))
-                bar_col = "#2d6a4f" if is_current else "#d4e6c3"
-                bdr = "border:1px solid #2d6a4f;" if is_current else ""
+                bar_col = "#2d6a4f" if is_current else "#1e3a1e"
+                bdr = "border:1px solid #52b788;" if is_current else ""
                 st.markdown(f"""
                 <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;padding:4px 6px;border-radius:6px;{bdr}">
-                    <div style="font-size:0.76rem;color:#1b1b1b;min-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{m_name}">
+                    <div style="font-size:0.76rem;color:#d4f0c0;min-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{m_name}">
                         {"&#11088; " if is_current else ""}{m_name[:18]}
                     </div>
-                    <div style="flex:1;height:14px;background:#e8e8e0;border-radius:4px;overflow:hidden">
+                    <div style="flex:1;height:14px;background:#1e3a1e;border-radius:4px;overflow:hidden">
                         <div style="width:{bar_w}%;height:100%;background:{bar_col};border-radius:4px"></div>
                     </div>
-                    <div style="font-size:0.78rem;font-weight:700;color:#1b1b1b;min-width:60px;text-align:right">₹{m_price:,}</div>
+                    <div style="font-size:0.78rem;font-weight:700;color:#d4f0c0;min-width:60px;text-align:right">₹{m_price:,}</div>
                 </div>""", unsafe_allow_html=True)
 
         # Price insight
@@ -300,7 +324,7 @@ if st.session_state.analysis_done:
             insight = "&#128308; Prices dropping — sell if spoilage risk is high, else wait"
 
         st.markdown(f"""
-        <div style="background:#f0f9f0;border:1px solid #d4e6c3;border-radius:8px;padding:0.6rem 0.8rem;margin-top:0.8rem;font-size:0.82rem;color:#333">
+        <div style="background:#112011;border:1px solid #1e3a1e;border-radius:8px;padding:0.6rem 0.8rem;margin-top:0.8rem;font-size:0.82rem;color:#a8d5ba">
             {insight}
         </div>
         </div>""", unsafe_allow_html=True)
@@ -478,7 +502,7 @@ if st.session_state.analysis_done:
         st.markdown(daily_rows, unsafe_allow_html=True)
 
         st.markdown(f"""
-            <div style="background:#f0f9f0;border:1px solid #d4e6c3;border-radius:10px;padding:0.8rem 1rem;margin-top:0.8rem;font-size:0.88rem;color:#333;line-height:1.6">
+            <div style="background:#112011;border:1px solid #1e3a1e;border-radius:10px;padding:0.8rem 1rem;margin-top:0.8rem;font-size:0.88rem;color:#a8d5ba;line-height:1.6">
                 {msg_icon} {farmer_msg}
             </div>
         </div>""", unsafe_allow_html=True)
@@ -501,6 +525,12 @@ if st.session_state.analysis_done:
 
 
 else:
+    # Show distance badge even when not yet calculated
+    st.markdown(f"""
+    <div style="background:#0c1a0c;border:1px solid {_dist_badge_color};border-radius:10px;
+        padding:0.5rem 1rem;margin-bottom:0.8rem;font-size:0.82rem;color:{_dist_badge_color}">
+        {_dist_msg}
+    </div>""", unsafe_allow_html=True)
     st.markdown(f"""
     <div class="score-card" style="opacity:0.6;">
         <div class="score-number" style="font-size:3rem;color:#a8d5ba;">—</div>

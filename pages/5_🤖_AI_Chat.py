@@ -1,4 +1,4 @@
-import sys, os
+﻿import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import streamlit as st
@@ -14,11 +14,11 @@ st.set_page_config(page_title="AI Chat — AgriChain", page_icon="🤖", layout=
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap');
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #fefae0 !important; color: #1b1b1b !important; }
-.stApp { background-color: #fefae0 !important; }
-[data-testid="stAppViewContainer"] { background-color: #fefae0 !important; }
-[data-testid="stHeader"] { background-color: #fefae0 !important; border-bottom: 1px solid #d4e6c3 !important; }
-section[data-testid="stSidebar"] { background-color: #1a3d2e !important; border-right: 1px solid #2d6a4f; }
+html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #0c1a0c !important; color: #d4f0c0 !important; }
+.stApp { background-color: #0c1a0c !important; }
+[data-testid="stAppViewContainer"] { background-color: #0c1a0c !important; }
+[data-testid="stHeader"] { background-color: #0c1a0c !important; border-bottom: 1px solid #1e3a1e !important; }
+section[data-testid="stSidebar"] { background-color: #0a1a0a !important; border-right: 1px solid #1e3a1e; }
 section[data-testid="stSidebar"] > div { padding: 1.2rem 1rem; }
 section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span, section[data-testid="stSidebar"] div { color: #d4f0c0 !important; }
 
@@ -48,13 +48,13 @@ section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p, sect
     box-shadow: 0 2px 8px #2d6a4f18;
 }
 .chat-msg-ai {
-    background: #f0f9f0;
-    border: 1px solid #d4e6c3;
+    background: #0c1a0c;
+    border: 1px solid #1e3a1e;
     border-radius: 14px 14px 14px 4px;
     padding: 0.8rem 1.2rem;
     margin-bottom: 0.8rem;
     font-size: 0.92rem;
-    color: #333;
+    color: #a8d5ba;
     line-height: 1.7;
     max-width: 80%;
     box-shadow: 0 2px 8px #2d6a4f08;

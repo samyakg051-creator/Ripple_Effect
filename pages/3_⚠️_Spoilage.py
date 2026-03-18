@@ -1,4 +1,4 @@
-import sys, os
+﻿import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import streamlit as st
@@ -18,11 +18,11 @@ st.set_page_config(page_title="Spoilage Assessor — AgriChain", page_icon="⚠�
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap');
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #fefae0 !important; color: #1b1b1b !important; }
-.stApp { background-color: #fefae0 !important; }
-[data-testid="stAppViewContainer"] { background-color: #fefae0 !important; }
-[data-testid="stHeader"] { background-color: #fefae0 !important; border-bottom: 1px solid #d4e6c3 !important; }
-section[data-testid="stSidebar"] { background-color: #1a3d2e !important; border-right: 1px solid #2d6a4f; }
+html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #0c1a0c !important; color: #d4f0c0 !important; }
+.stApp { background-color: #0c1a0c !important; }
+[data-testid="stAppViewContainer"] { background-color: #0c1a0c !important; }
+[data-testid="stHeader"] { background-color: #0c1a0c !important; border-bottom: 1px solid #1e3a1e !important; }
+section[data-testid="stSidebar"] { background-color: #0a1a0a !important; border-right: 1px solid #1e3a1e; }
 section[data-testid="stSidebar"] > div { padding: 1.2rem 1rem; }
 section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span, section[data-testid="stSidebar"] div { color: #d4f0c0 !important; }
 
@@ -60,7 +60,7 @@ section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p, sect
 .risk-label-medium { font-size: 2.6rem; font-weight: 900; color: #856404; }
 .risk-label-low    { font-size: 2.6rem; font-weight: 900; color: #2d6a4f; }
 
-.risk-prob  { font-size: 1.05rem; color: #333; margin-top: 8px; }
+.risk-prob  { font-size: 1.05rem; color: #a8d5ba; margin-top: 8px; }
 .risk-why   { font-size: 0.9rem; color: #666; margin-top: 10px; font-style: italic; line-height: 1.6; }
 
 .action-card {
@@ -71,22 +71,22 @@ section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p, sect
     gap: 16px; border: 1px solid transparent;
     box-shadow: 0 2px 8px #2d6a4f08;
 }
-.action-high   { background: #fff; border-color: #f5c6cb; }
-.action-medium { background: #fff; border-color: #ffeeba; }
-.action-low    { background: #fff; border-color: #c3e6cb; }
+.action-high   { background: #112011; border-color: #f5c6cb; }
+.action-medium { background: #112011; border-color: #ffeeba; }
+.action-low    { background: #112011; border-color: #c3e6cb; }
 
-.action-num  { font-size: 1.1rem; font-weight: 900; color: #888; flex-shrink: 0; width: 24px; }
-.action-text { font-size: 0.93rem; font-weight: 600; color: #1b1b1b; line-height: 1.4; }
+.action-num  { font-size: 1.1rem; font-weight: 900; color: #52b788; flex-shrink: 0; width: 24px; }
+.action-text { font-size: 0.93rem; font-weight: 600; color: #d4f0c0; line-height: 1.4; }
 .action-meta { font-size: 0.82rem; color: #666; margin-top: 4px; }
 .eff-high    { color: #2d6a4f !important; font-weight: 700; }
 .eff-medium  { color: #856404 !important; font-weight: 700; }
 
-[data-testid="metric-container"] { background:#fff !important; border:1px solid #d4e6c3 !important; border-radius:14px !important; padding:18px !important; }
-[data-testid="metric-container"] label { color:#555 !important; font-size:0.82rem !important; }
-[data-testid="metric-container"] [data-testid="stMetricValue"] { color:#1b1b1b !important; font-weight:800 !important; }
+[data-testid="metric-container"] { background:#112011 !important; border:1px solid #1e3a1e !important; border-radius:14px !important; padding:18px !important; }
+[data-testid="metric-container"] label { color:#52b788 !important; font-size:0.82rem !important; }
+[data-testid="metric-container"] [data-testid="stMetricValue"] { color:#d4f0c0 !important; font-weight:800 !important; }
 .stButton > button { background-color: #2d6a4f; color: #fff; font-weight: 700; border: none; border-radius: 8px; }
 .stButton > button:hover { background-color: #1a3d2e; }
-h1,h2,h3,h4 { color:#1b1b1b; } p { color:#333; }
+h1,h2,h3,h4 { color:#d4f0c0; } p { color:#a8d5ba; }
 footer { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
@@ -153,7 +153,7 @@ if run:
     # Risk Banner
     st.markdown(f"""
     <div class="risk-banner {risk_class}">
-      <div style="color:#555;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">
+      <div style="color:#52b788;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;">
         {t('Spoilage Risk', lang_code)}
       </div>
       <div class="{label_class}">{color} {t(risk, lang_code)}</div>
@@ -196,7 +196,7 @@ if run:
             },
         ))
         fig.update_layout(
-            paper_bgcolor="#fefae0", font_color="#333",
+            paper_bgcolor="#0c1a0c", font_color="#d4f0c0",
             height=260, margin=dict(l=20, r=20, t=40, b=10),
         )
         st.plotly_chart(fig, use_container_width=True)

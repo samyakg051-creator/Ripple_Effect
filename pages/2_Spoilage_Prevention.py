@@ -1,4 +1,4 @@
-"""
+﻿"""
 pages/2_Spoilage_Prevention.py
 AgriChain — Spoilage Risk & Prevention Guide
 """
@@ -14,10 +14,10 @@ st.set_page_config(page_title="AgriChain — Spoilage Prevention", page_icon="�
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Syne:wght@700;800&display=swap');
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #fefae0 !important; color: #1b1b1b !important; }
-.stApp, .main, .main > div, .block-container, [data-testid="stAppViewContainer"] { background-color: #fefae0 !important; }
-[data-testid="stHeader"] { background-color: #fefae0 !important; border-bottom: 1px solid #d4e6c3 !important; }
-section[data-testid="stSidebar"] { background-color: #1a3d2e !important; border-right: 1px solid #2d6a4f; }
+html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #0c1a0c !important; color: #d4f0c0 !important; }
+.stApp, .main, .main > div, .block-container, [data-testid="stAppViewContainer"] { background-color: #0c1a0c !important; }
+[data-testid="stHeader"] { background-color: #0c1a0c !important; border-bottom: 1px solid #1e3a1e !important; }
+section[data-testid="stSidebar"] { background-color: #0a1a0a !important; border-right: 1px solid #1e3a1e; }
 section[data-testid="stSidebar"] > div { padding: 1.2rem 1rem; }
 section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] div { color: #d4f0c0 !important; }
 div[data-testid="stSelectbox"] > div > div { background-color: #0e2a1c !important; border: 1px solid #2d6a4f !important; border-radius: 8px !important; color: #d4f0c0 !important; }
@@ -29,16 +29,16 @@ div[data-testid="stSelectbox"] > div > div { background-color: #0e2a1c !importan
 .risk-high   { background: linear-gradient(135deg,#f8d7da,#f5c6cb); border: 2px solid #f44336; }
 .risk-label  { font-family:'Syne',sans-serif; font-size:3rem; font-weight:800; }
 .risk-pct    { font-size:1.2rem; margin-top:4px; opacity:0.8; }
-.tip-card  { background:#fff; border:1px solid #d4e6c3; border-radius:12px; padding:1rem 1.2rem; margin-bottom:0.6rem; box-shadow:0 2px 8px #2d6a4f08; }
+.tip-card  { background:#112011; border:1px solid #1e3a1e; border-radius:12px; padding:1rem 1.2rem; margin-bottom:0.6rem; box-shadow:0 2px 8px #2d6a4f08; }
 .tip-title { font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.4rem; }
 .tip-low    { color:#155724; }
 .tip-medium { color:#856404; }
 .tip-high   { color:#721c24; }
 .section-hd { font-family:'Syne',sans-serif; font-size:1.1rem; font-weight:800; color:#2d6a4f; margin:1.2rem 0 0.5rem; }
 .metric-row { display:flex; gap:1rem; flex-wrap:wrap; margin-bottom:1rem; }
-.metric-pill { background:#fff; border:1px solid #d4e6c3; border-radius:10px; padding:0.7rem 1rem; flex:1; min-width:130px; box-shadow:0 2px 8px #2d6a4f08; }
-.metric-pill .lbl { font-size:0.7rem; color:#555; text-transform:uppercase; }
-.metric-pill .val { font-size:1.2rem; font-weight:700; color:#1b1b1b; }
+.metric-pill { background:#112011; border:1px solid #1e3a1e; border-radius:10px; padding:0.7rem 1rem; flex:1; min-width:130px; box-shadow:0 2px 8px #2d6a4f08; }
+.metric-pill .lbl { font-size:0.7rem; color:#52b788; text-transform:uppercase; }
+.metric-pill .val { font-size:1.2rem; font-weight:700; color:#d4f0c0; }
 footer { visibility:hidden; }
 </style>
 """, unsafe_allow_html=True)
@@ -246,7 +246,7 @@ for rank, (action, cost, effectiveness, time_needed, benefit) in enumerate(actio
     <div class="tip-card" style="display:flex;align-items:center;gap:1rem;">
         <div style="font-size:1.6rem;font-weight:800;color:{rank_color};min-width:32px;text-align:center">#{rank}</div>
         <div style="flex:1">
-            <div style="font-weight:700;color:#1b1b1b;font-size:0.92rem">{action}</div>
+            <div style="font-weight:700;color:#d4f0c0;font-size:0.92rem">{action}</div>
             <div style="display:flex;gap:1.5rem;margin-top:4px;flex-wrap:wrap">
                 <span style="font-size:0.78rem;color:#555">💰 {t('Cost', lang)}: <b style="color:#1b1b1b">{cost}</b></span>
                 <span style="font-size:0.78rem;color:#555">⭐ {t('Rating', lang)}: <b style="color:#b8860b">{effectiveness}</b></span>
@@ -274,7 +274,7 @@ else:
             </div>""", unsafe_allow_html=True)
 
 st.markdown("""
-<div style="text-align:center;color:#555;font-size:0.76rem;margin-top:1rem">
+<div style="text-align:center;color:#52b788;font-size:0.76rem;margin-top:1rem">
     {t('Risk disclaimer', lang)}
 </div>""", unsafe_allow_html=True)
 

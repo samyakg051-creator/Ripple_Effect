@@ -1,4 +1,4 @@
-import sys, os
+﻿import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import streamlit as st
@@ -19,11 +19,11 @@ st.set_page_config(page_title="Harvest Window — AgriChain", page_icon="🌾", 
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap');
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #fefae0 !important; color: #1b1b1b !important; }
-.stApp { background-color: #fefae0 !important; }
-[data-testid="stAppViewContainer"] { background-color: #fefae0 !important; }
-[data-testid="stHeader"] { background-color: #fefae0 !important; border-bottom: 1px solid #d4e6c3 !important; }
-section[data-testid="stSidebar"] { background-color: #1a3d2e !important; border-right: 1px solid #2d6a4f; }
+html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #0c1a0c !important; color: #d4f0c0 !important; }
+.stApp { background-color: #0c1a0c !important; }
+[data-testid="stAppViewContainer"] { background-color: #0c1a0c !important; }
+[data-testid="stHeader"] { background-color: #0c1a0c !important; border-bottom: 1px solid #1e3a1e !important; }
+section[data-testid="stSidebar"] { background-color: #0a1a0a !important; border-right: 1px solid #1e3a1e; }
 section[data-testid="stSidebar"] > div { padding: 1.2rem 1rem; }
 section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span, section[data-testid="stSidebar"] div { color: #d4f0c0 !important; }
 
@@ -56,29 +56,29 @@ section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p, sect
 .window-label { color: #a8d5ba; font-size: 0.82rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; }
 .window-dates { font-size: 1.9rem; font-weight: 900; color: #6ee86e; margin: 8px 0 4px; }
 
-.score-bar-wrap { background: #e8e8e0; border-radius: 10px; height: 10px; overflow: hidden; margin-top: 6px; }
+.score-bar-wrap { background: #1e3a1e; border-radius: 10px; height: 10px; overflow: hidden; margin-top: 6px; }
 .score-bar      { height: 100%; border-radius: 10px; background: linear-gradient(90deg, #2d7a4f, #52b788); transition: width 0.5s ease; }
 
 .reason-card {
-    background: #fff;
-    border: 1px solid #d4e6c3;
+    background: #112011;
+    border: 1px solid #1e3a1e;
     border-left: 4px solid #2d6a4f;
     border-radius: 10px;
     padding: 14px 18px;
     margin: 8px 0;
-    color: #333;
+    color: #a8d5ba;
     font-size: 0.93rem;
     line-height: 1.6;
     box-shadow: 0 2px 8px #2d6a4f08;
 }
 
-[data-testid="metric-container"] { background:#fff !important; border:1px solid #d4e6c3 !important; border-radius:14px !important; padding:18px !important; }
-[data-testid="metric-container"] label { color:#555 !important; font-size:0.82rem !important; }
-[data-testid="metric-container"] [data-testid="stMetricValue"] { color:#1b1b1b !important; font-weight:800 !important; }
+[data-testid="metric-container"] { background:#112011 !important; border:1px solid #1e3a1e !important; border-radius:14px !important; padding:18px !important; }
+[data-testid="metric-container"] label { color:#52b788 !important; font-size:0.82rem !important; }
+[data-testid="metric-container"] [data-testid="stMetricValue"] { color:#d4f0c0 !important; font-weight:800 !important; }
 .stButton > button { background-color: #2d6a4f; color: #fff; font-weight: 700; border: none; border-radius: 8px; }
 .stButton > button:hover { background-color: #1a3d2e; }
-h1,h2,h3,h4 { color:#1b1b1b; }
-p { color:#333; }
+h1,h2,h3,h4 { color:#d4f0c0; }
+p { color:#a8d5ba; }
 footer { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
@@ -159,8 +159,8 @@ if run:
         pct = int(val * 100)
         color = "#2d6a4f" if pct >= 60 else "#e3a008" if pct >= 40 else "#c0392b"
         col.markdown(f"""
-        <div style="background:#fff;border:1px solid #d4e6c3;border-radius:14px;padding:18px;box-shadow:0 2px 8px #2d6a4f08;">
-          <div style="color:#555;font-size:0.8rem;font-weight:600;letter-spacing:0.08em;">{emoji} {label}</div>
+        <div style="background:#112011;border:1px solid #1e3a1e;border-radius:14px;padding:18px;box-shadow:0 2px 8px #2d6a4f08;">
+          <div style="color:#52b788;font-size:0.8rem;font-weight:600;letter-spacing:0.08em;">{emoji} {label}</div>
           <div style="font-size:1.7rem;font-weight:900;color:{color};margin:6px 0 10px;">{pct}%</div>
           <div class="score-bar-wrap"><div class="score-bar" style="width:{pct}%;background:linear-gradient(90deg,{'#2d7a4f,#52b788' if pct>=60 else '#b8860b,#e3a008' if pct>=40 else '#a02020,#c0392b'});"></div></div>
         </div>""", unsafe_allow_html=True)
@@ -181,10 +181,10 @@ if run:
                   color_discrete_sequence=["#2d6a4f"], template="simple_white")
     fig.update_traces(fillcolor="rgba(45,106,79,0.12)", line=dict(width=2.5))
     fig.update_layout(
-        paper_bgcolor="#fefae0", plot_bgcolor="#fefae0",
-        font_color="#333", margin=dict(l=16, r=16, t=16, b=16),
+        paper_bgcolor="#0c1a0c", plot_bgcolor="#0c1a0c",
+        font_color="#d4f0c0", margin=dict(l=16, r=16, t=16, b=16),
         xaxis=dict(showgrid=False, color="#555", tickfont=dict(size=11)),
-        yaxis=dict(gridcolor="#d4e6c3", color="#555", tickfont=dict(size=11)),
+        yaxis=dict(gridColor="#1e3a1e", color="#555", tickfont=dict(size=11)),
         height=280,
     )
     import pandas as _pd

@@ -1,4 +1,4 @@
-"""
+﻿"""
 pages/4_Map_Explorer.py  (ASCII-safe version —  emoji in page display name is set via st.set_page_config)
 AgriChain — Interactive India / Maharashtra Agricultural Map Explorer.
 """
@@ -34,17 +34,17 @@ st.markdown("""
 
 html, body, [class*="css"] {
     font-family: 'Inter', sans-serif;
-    background-color: #fefae0 !important;
-    color: #1b1b1b !important;
+    background-color: #0c1a0c !important;
+    color: #d4f0c0 !important;
 }
-.stApp { background-color: #fefae0 !important; }
-.main, .main > div, .block-container { background-color: #fefae0 !important; }
-[data-testid="stAppViewContainer"] { background-color: #fefae0 !important; }
+.stApp { background-color: #0c1a0c !important; }
+.main, .main > div, .block-container { background-color: #0c1a0c !important; }
+[data-testid="stAppViewContainer"] { background-color: #0c1a0c !important; }
 [data-testid="stHeader"] {
-    background-color: #fefae0 !important;
-    border-bottom: 1px solid #d4e6c3 !important;
+    background-color: #0c1a0c !important;
+    border-bottom: 1px solid #1e3a1e !important;
 }
-section[data-testid="stSidebar"] { background-color: #1a3d2e !important; }
+section[data-testid="stSidebar"] { background-color: #0a1a0a !important; }
 section[data-testid="stSidebar"] > div { padding: 1.2rem 1rem; }
 section[data-testid="stSidebar"] label,
 section[data-testid="stSidebar"] p,
@@ -52,7 +52,7 @@ section[data-testid="stSidebar"] span,
 section[data-testid="stSidebar"] div { color: #d4f0c0 !important; }
 
 .info-card {
-    background: #fff; border: 1px solid #d4e6c3;
+    background: #112011; border: 1px solid #1e3a1e;
     border-radius: 14px; padding: 1.2rem 1.4rem;
     margin-bottom: 1rem; box-shadow: 0 2px 8px #2d6a4f15;
 }
@@ -65,8 +65,8 @@ section[data-testid="stSidebar"] div { color: #d4f0c0 !important; }
     font-size: 0.88rem; padding: 4px 0; border-bottom: 1px solid #f0ebd0;
 }
 .summary-row:last-child { border-bottom: none; }
-.summary-key { color: #888; }
-.summary-val { font-weight: 600; color: #1b1b1b; }
+.summary-key { color: #52b788; }
+.summary-val { font-weight: 600; color: #d4f0c0; }
 .district-badge {
     display: inline-flex; align-items: center; gap: 8px;
     background: #2d6a4f; color: #fff; border-radius: 20px;
@@ -85,7 +85,7 @@ section[data-testid="stSidebar"] div { color: #d4f0c0 !important; }
 .stButton > button:hover { background: #1a3d2e; }
 footer { visibility: hidden; }
 .nav-card {
-    background: #fff; border: 2px solid #52b788; border-radius: 14px;
+    background: #112011; border: 2px solid #52b788; border-radius: 14px;
     padding: 1.2rem 1.4rem; margin-bottom: 1rem; box-shadow: 0 4px 16px #2d6a4f22;
 }
 .nav-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #2d6a4f; margin-bottom: 0.8rem; }
@@ -96,7 +96,7 @@ footer { visibility: hidden; }
 }
 .nav-btn:hover { background: #1a3d2e; }
 .mandi-nav-card {
-    background: #f0f9f0; border: 1px solid #d4e6c3; border-radius: 12px;
+    background: #0c1a0c; border: 1px solid #1e3a1e; border-radius: 12px;
     padding: 1rem; text-align: center; cursor: pointer; transition: all 0.2s;
 }
 .mandi-nav-card:hover { border-color: #52b788; box-shadow: 0 2px 8px #2d6a4f15; }
@@ -192,7 +192,7 @@ with st.sidebar:
 
 # ── Main content ──────────────────────────────────────────────────────────────
 st.markdown('<div class="section-heading">&#128506;&#65039; Maharashtra — Agricultural Map</div>', unsafe_allow_html=True)
-st.markdown(f"<p style='color:#555;font-size:0.9rem;margin-top:-0.3rem'>{t('click_district', lang)}</p>",
+st.markdown(f"<p style='color:#52b788;font-size:0.9rem;margin-top:-0.3rem'>{t('click_district', lang)}</p>",
             unsafe_allow_html=True)
 
 # District dropdown (synced with map click)
@@ -293,7 +293,7 @@ with col1:
     coords = DISTRICT_CENTROIDS.get(current_district, (0, 0))
     st.markdown(f"""
     <div class="district-badge">{CROP_EMOJI.get(crop, DEFAULT_EMOJI)} {current_district}</div>
-    <div style="font-size:0.82rem;color:#555;margin-top:0.6rem">
+    <div style="font-size:0.82rem;color:#52b788;margin-top:0.6rem">
         <div>Lat: {coords[0]:.4f} &nbsp;|&nbsp; Lon: {coords[1]:.4f}</div>
         <div style="margin-top:4px">Crop: <b>{crop}</b></div>
     </div>
@@ -305,7 +305,7 @@ with col2:
     st.markdown('<div class="info-card">', unsafe_allow_html=True)
     st.markdown('<div class="info-card-title">&#127978; Top Mandi Prices</div>', unsafe_allow_html=True)
     if top_mandis.empty:
-        st.markdown('<div style="color:#888;font-size:0.85rem">No data</div>', unsafe_allow_html=True)
+        st.markdown('<div style="color:#52b788;font-size:0.85rem">No data</div>', unsafe_allow_html=True)
     else:
         for _, row in top_mandis.iterrows():
             st.markdown(f"""

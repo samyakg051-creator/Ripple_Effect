@@ -1,4 +1,4 @@
-import sys, os
+﻿import sys, os
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import streamlit as st
@@ -19,11 +19,11 @@ st.set_page_config(page_title="Mandi Ranker — AgriChain", page_icon="🏪", la
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap');
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #fefae0 !important; color: #1b1b1b !important; }
-.stApp { background-color: #fefae0 !important; }
-[data-testid="stAppViewContainer"] { background-color: #fefae0 !important; }
-[data-testid="stHeader"] { background-color: #fefae0 !important; border-bottom: 1px solid #d4e6c3 !important; }
-section[data-testid="stSidebar"] { background-color: #1a3d2e !important; border-right: 1px solid #2d6a4f; }
+html, body, [class*="css"] { font-family: 'Inter', sans-serif; background-color: #0c1a0c !important; color: #d4f0c0 !important; }
+.stApp { background-color: #0c1a0c !important; }
+[data-testid="stAppViewContainer"] { background-color: #0c1a0c !important; }
+[data-testid="stHeader"] { background-color: #0c1a0c !important; border-bottom: 1px solid #1e3a1e !important; }
+section[data-testid="stSidebar"] { background-color: #0a1a0a !important; border-right: 1px solid #1e3a1e; }
 section[data-testid="stSidebar"] > div { padding: 1.2rem 1rem; }
 section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p, section[data-testid="stSidebar"] span, section[data-testid="stSidebar"] div { color: #d4f0c0 !important; }
 
@@ -44,7 +44,7 @@ section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p, sect
     border-radius: 18px;
     padding: 0;
     margin-bottom: 20px;
-    border: 1px solid #d4e6c3;
+    border: 1px solid #1e3a1e;
     overflow: hidden;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     box-shadow: 0 2px 8px #2d6a4f08;
@@ -60,39 +60,39 @@ section[data-testid="stSidebar"] label, section[data-testid="stSidebar"] p, sect
     display: flex; align-items: center; justify-content: center;
     font-size: 1.2rem; font-weight: 900; flex-shrink: 0;
 }
-.rank-1-badge { background: linear-gradient(135deg, #b8860b, #ffd700); color: #1b1b1b; }
-.rank-2-badge { background: linear-gradient(135deg, #708090, #c0c0c0); color: #1b1b1b; }
+.rank-1-badge { background: linear-gradient(135deg, #b8860b, #ffd700); color: #d4f0c0; }
+.rank-2-badge { background: linear-gradient(135deg, #708090, #c0c0c0); color: #d4f0c0; }
 .rank-3-badge { background: linear-gradient(135deg, #8b4513, #cd7f32); color: #fff; }
 
-.mandi-name   { font-size: 1.15rem; font-weight: 800; color: #1b1b1b; }
+.mandi-name   { font-size: 1.15rem; font-weight: 800; color: #d4f0c0; }
 .mandi-reason { font-size: 0.83rem; color: #666; font-style: italic; margin-top: 3px; }
 
-.mandi-card-1 { background: linear-gradient(160deg, #f0f9f0, #d4edda); border-color: #2d6a4f; }
-.mandi-card-2 { background: linear-gradient(160deg, #f0f4ff, #d4e6f0); border-color: #2a4a7a; }
-.mandi-card-3 { background: linear-gradient(160deg, #fdf6ee, #f5e6d0); border-color: #b8860b; }
+.mandi-card-1 { background: linear-gradient(160deg, #0e2a0e, #1a3d1a); border-color: #2d6a4f; }
+.mandi-card-2 { background: linear-gradient(160deg, #0e1a2a, #1a2a3d); border-color: #2a4a7a; }
+.mandi-card-3 { background: linear-gradient(160deg, #2a1e0e, #3d2a1a); border-color: #b8860b; }
 
 .mandi-metrics {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0; border-top: 1px solid #d4e6c3;
+    gap: 0; border-top: 1px solid #1e3a1e;
 }
 .mandi-metric-cell {
     padding: 14px 18px;
-    border-right: 1px solid #d4e6c3;
-    text-align: center; background: #fff;
+    border-right: 1px solid #1e3a1e;
+    text-align: center; background: #112011;
 }
 .mandi-metric-cell:last-child { border-right: none; }
-.mandi-metric-label { font-size: 0.72rem; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
-.mandi-metric-value { font-size: 1.1rem; font-weight: 800; color: #1b1b1b; margin-top: 3px; }
+.mandi-metric-label { font-size: 0.72rem; color: #52b788; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; }
+.mandi-metric-value { font-size: 1.1rem; font-weight: 800; color: #d4f0c0; margin-top: 3px; }
 .metric-green { color: #2d6a4f !important; }
 .metric-red   { color: #c0392b !important; }
 
-[data-testid="metric-container"] { background:#fff !important; border:1px solid #d4e6c3 !important; border-radius:14px !important; padding:18px !important; }
-[data-testid="metric-container"] label { color:#555 !important; font-size:0.82rem !important; }
-[data-testid="metric-container"] [data-testid="stMetricValue"] { color:#1b1b1b !important; font-weight:800 !important; }
+[data-testid="metric-container"] { background:#112011 !important; border:1px solid #1e3a1e !important; border-radius:14px !important; padding:18px !important; }
+[data-testid="metric-container"] label { color:#52b788 !important; font-size:0.82rem !important; }
+[data-testid="metric-container"] [data-testid="stMetricValue"] { color:#d4f0c0 !important; font-weight:800 !important; }
 .stButton > button { background-color: #2d6a4f; color: #fff; font-weight: 700; border: none; border-radius: 8px; }
 .stButton > button:hover { background-color: #1a3d2e; }
-h1,h2,h3,h4 { color:#1b1b1b; } p { color:#333; }
+h1,h2,h3,h4 { color:#d4f0c0; } p { color:#a8d5ba; }
 footer { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
@@ -165,11 +165,11 @@ if run:
               <div class="mandi-metrics">
                 <div class="mandi-metric-cell">
                   <div class="mandi-metric-label">{t('Expected Price', lang_code)}</div>
-                  <div class="mandi-metric-value metric-green">₹{m['expected_price']:,.0f}<span style="font-size:0.7rem;color:#888;">/qtl</span></div>
+                  <div class="mandi-metric-value metric-green">₹{m['expected_price']:,.0f}<span style="font-size:0.7rem;color:#52b788;">/qtl</span></div>
                 </div>
                 <div class="mandi-metric-cell">
                   <div class="mandi-metric-label">{t('Transport Cost', lang_code)}</div>
-                  <div class="mandi-metric-value metric-red">₹{m['transport_cost_qtl']:,.0f}<span style="font-size:0.7rem;color:#888;">/qtl</span></div>
+                  <div class="mandi-metric-value metric-red">₹{m['transport_cost_qtl']:,.0f}<span style="font-size:0.7rem;color:#52b788;">/qtl</span></div>
                 </div>
                 <div class="mandi-metric-cell">
                   <div class="mandi-metric-label">{t('Net Profit per Qtl', lang_code)}</div>
@@ -177,7 +177,7 @@ if run:
                 </div>
                 <div class="mandi-metric-cell">
                   <div class="mandi-metric-label">{t('Distance', lang_code)}</div>
-                  <div class="mandi-metric-value">{m['distance_km']:.0f} <span style="font-size:0.7rem;color:#888;">km</span></div>
+                  <div class="mandi-metric-value">{m['distance_km']:.0f} <span style="font-size:0.7rem;color:#52b788;">km</span></div>
                 </div>
               </div>
             </div>
@@ -199,12 +199,12 @@ if run:
             template="simple_white",
         )
         fig.update_layout(
-            paper_bgcolor="#fefae0", plot_bgcolor="#fefae0",
-            font_color="#333", height=320,
-            legend=dict(bgcolor="#fff", bordercolor="#d4e6c3", font=dict(size=12)),
+            paper_bgcolor="#0c1a0c", plot_bgcolor="#0c1a0c",
+            font_color="#d4f0c0", height=320,
+            legend=dict(bgcolor="#112011", bordercolor="#1e3a1e", font=dict(size=12)),
             margin=dict(l=16, r=16, t=16, b=16),
             xaxis=dict(showgrid=False, tickfont=dict(size=12)),
-            yaxis=dict(gridcolor="#d4e6c3", tickfont=dict(size=11)),
+            yaxis=dict(gridColor="#1e3a1e", tickfont=dict(size=11)),
             bargap=0.3, bargroupgap=0.08,
         )
         st.plotly_chart(fig, use_container_width=True)
